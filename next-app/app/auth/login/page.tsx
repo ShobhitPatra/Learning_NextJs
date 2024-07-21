@@ -1,10 +1,16 @@
-import Link from "next/link";
+"use client";
+import React from "react";
 
 const Login = () => {
+  const handleSubmit = (e: React.FormEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    console.log("clicked");
+    return;
+  };
   return (
     <div className="h-screen bg-slate-950 flex justify-center items-center  ">
       <div className="bg-slate-700 p-6 rounded-md hover:shadow-md  hover:shadow-slate-600">
-        <form>
+        <form onSubmit={handleSubmit}>
           <h1 className=" text-slate-100 hover:text-green-400 font-semibold text-3xl text-center mb-5">
             Login
           </h1>
