@@ -1,10 +1,24 @@
 "use client";
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
 
 const Login = () => {
-  const handleSubmit = (e: React.FormEvent<HTMLInputElement>) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  // const router = useRouter();
+  const handleSubmit = async (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
-    console.log("clicked");
+    const res = await fetch("http://localhost:3000/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username,
+        password,
+      }),
+    });
+    // router.push("/");
     return;
   };
   return (
@@ -19,6 +33,8 @@ const Login = () => {
               <span className="text-base text-white">username</span>
             </label>
             <input
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               type="text"
               placeholder="username@email.com"
               className="rounded-sm p-1 "
@@ -29,6 +45,8 @@ const Login = () => {
               <span className="text-base text-white">password</span>
             </label>
             <input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               type="text"
               placeholder="Pass@929"
               className="rounded-sm p-1"

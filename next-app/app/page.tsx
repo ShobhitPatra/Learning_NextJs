@@ -4,17 +4,10 @@ import Navbar from "./components/Navbar";
 type UserType = {
   name: string;
   email: string;
-  address: {
-    city: string;
-    state: string;
-    houseNumber: string;
-  };
 };
 const getUserDetails = async () => {
   try {
-    const res = await fetch(
-      "https://week-13-offline.kirattechnologies.workers.dev/api/v1/user/details"
-    );
+    const res = await fetch("http://localhost:3000/api/user");
     const data = await res.json();
     return data;
   } catch (error: any) {
@@ -32,10 +25,6 @@ export default async function Home() {
         <div>
           <div>name : {user.name}</div>
           <div>email : {user.email}</div>
-          <div>
-            address : {user.address.city},{user.address.state},
-            {user.address.houseNumber}
-          </div>
         </div>
       </div>
     </div>
